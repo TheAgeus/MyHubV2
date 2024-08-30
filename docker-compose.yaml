@@ -1,0 +1,35 @@
+services:
+  csharp:
+    build:
+      context: .
+    container_name: csharp
+    image: ageus94/csharp:1.0.0
+    ports:
+    - 5000:8080
+    volumes:
+    - ./src/:/work
+    environment:
+      - ConnectionStrings__DefaultConnection=${ConnectionStrings__DefaultConnection}
+    depends_on:
+      - sql
+    networks:
+      - mynetwork
+
+  sql:
+    image: "mcr.microsoft.com/mssql/server:2022-latest"
+    container_name: sql_server2022
+    ports:
+      - "1433:1433"
+    environment:
+      - ACCEPT_EULA=y
+      - SA_PASSWORD=${SA_PASSWORD}
+    networks:
+      - mynetwork
+    volumes:
+      - ./sql-scripts:/var/opt/mssql/scripts
+      - ./cmd-scripts/entrypoint.sh:/usr/src/app/entrypoint.sh
+    entrypoint: ["/bin/bash", "/usr/src/app/entrypoint.sh"]
+
+networks:
+  mynetwork:
+    driver: bridge

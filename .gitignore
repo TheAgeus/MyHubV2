@@ -1,0 +1,5 @@
+.env
+/src/appsettings.Development.json
+/src/appsettings.json
+/src/bin/Debug
+/src/obj

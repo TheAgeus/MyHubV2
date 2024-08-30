@@ -1,0 +1,14 @@
+CREATE DATABASE MyDatabase;
+GO
+
+USE MyDatabase;
+GO
+
+CREATE TABLE Users (
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    FistNames NVARCHAR(100) NOT NULL,
+    PaternalLastName NVARCHAR(100) NOT NULL,
+    MaternalLastName NVARCHAR(100) NOT NULL,
+    Mail NVARCHAR(100) NOT NULL,
+    Password NVARCHAR(100) NOT NULL
+);
